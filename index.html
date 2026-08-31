@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOKUSHI DRILL | 薬剤師国家試験 演習ドリル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ADER ERROR CONCEPT DESIGN SYSTEM
+   ============================================================ */
+:root{
+  --ader-blue:#001AFF;
+  --charcoal:#121212;
+  --light-gray:#F4F4F6;
+  --white:#FFFFFF;
+  --border:#E2E8F0;
+  --correct:#0BAA60;
+  --incorrect:#E63946;
+  --shadow-blue:4px 4px 0px var(--ader-blue);
+  --shadow-blue-sm:2px 2px 0px var(--ader-blue);
+  --shadow-charcoal:5px 5px 0px var(--charcoal);
+  --shadow-charcoal-sm:2px 2px 0px var(--charcoal);
+  --font-head:'Montserrat',sans-serif;
+  --font-num:'Space Grotesk',monospace;
+  --font-body:'Noto Sans JP',sans-serif;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--light-gray);
+  color:var(--charcoal);
+  font-family:var(--font-body);
+  font-weight:500;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer;}
+img{max-width:100%;}
+table{border-collapse:collapse;width:100%;margin:12px 0;}
+table th,table td{border:1px solid var(--border);padding:8px 10px;font-size:0.88rem;text-align:left;}
+table th{background:var(--charcoal);color:var(--white);font-family:var(--font-num);letter-spacing:.03em;}
+table tr:nth-child(even){background:#FAFAFC;}
+
+::selection{background:var(--ader-blue);color:var(--white);}
+
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:var(--charcoal);border-radius:0;}
+::-webkit-scrollbar-track{background:var(--light-gray);}
+
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--white);
+  border:2px solid var(--charcoal);
+  border-radius:6px;
+  padding:9px 16px;
+  font-family:var(--font-head);
+  font-weight:600;
+  font-size:0.82rem;
+  letter-spacing:.02em;
+  color:var(--charcoal);
+  box-shadow:var(--shadow-charcoal-sm);
+  transform:translate(0,0);
+  transition:transform .08s ease, box-shadow .08s ease, background .15s ease, color .15s ease;
+  white-space:nowrap;
+}
+.btn:hover{transform:translate(1px,1px);box-shadow:1px 1px 0px var(--charcoal);}
+.btn:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--charcoal);}
+.btn.primary{background:var(--ader-blue);color:var(--white);border-color:var(--ader-blue);box-shadow:var(--shadow-charcoal-sm);}
+.btn.primary:hover{box-shadow:1px 1px 0px var(--charcoal);}
+.btn.ghost{background:transparent;box-shadow:none;border-color:var(--border);}
+.btn.ghost:hover{box-shadow:none;transform:none;border-color:var(--charcoal);}
+.btn.small{padding:6px 10px;font-size:0.72rem;}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:var(--shadow-charcoal-sm);}
+.btn.block{width:100%;justify-content:center;}
+
+.select-pill{
+  border:2px solid var(--charcoal);
+  border-radius:6px;
+  background:var(--white);
+  padding:8px 10px;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:0.78rem;
+  color:var(--charcoal);
+  box-shadow:var(--shadow-charcoal-sm);
+}
+
+.serial-badge{
+  display:inline-block;
+  font-family:var(--font-num);
+  font-weight:700;
+  font-size:0.72rem;
+  letter-spacing:.06em;
+  background:var(--charcoal);
+  color:var(--white);
+  padding:4px 9px;
+  border-radius:4px;
+}
+.serial-badge.blue{background:var(--ader-blue);}
+.serial-badge.outline{background:transparent;color:var(--charcoal);border:1.5px solid var(--charcoal);}
+
+/* ============================================================
+   HEADER / TOPBAR
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);
+  border-bottom:3px solid var(--charcoal);
+  padding:12px 20px;
+}
+.topbar-row1{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-mark{font-family:var(--font-head);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;}
+.logo-mark span{color:var(--ader-blue);}
+.logo-sub{font-family:var(--font-num);font-size:0.68rem;letter-spacing:.1em;color:#7A7A85;text-transform:uppercase;}
+.topbar-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+
+.topbar-row2{
+  display:flex;gap:8px;align-items:center;justify-content:space-between;
+  margin-top:12px;flex-wrap:wrap;
+}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+
+.stats-strip{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  font-family:var(--font-num);font-size:0.75rem;
+}
+.stats-item{display:flex;flex-direction:column;gap:2px;min-width:70px;}
+.stats-item .label{color:#8A8A95;font-size:0.62rem;letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-body);font-weight:700;}
+.stats-item .value{font-weight:700;font-size:1rem;}
+.progress-track{
+  width:130px;height:8px;background:var(--light-gray);border:1.5px solid var(--charcoal);border-radius:4px;overflow:hidden;
+}
+.progress-fill{height:100%;background:var(--ader-blue);transition:width .3s ease;}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.app-layout{
+  display:grid;
+  grid-template-columns:45% 55%;
+  gap:0;
+  align-items:start;
+  min-height:calc(100vh - 128px);
+}
+.lead-panel{
+  border-right:3px solid var(--charcoal);
+  background:var(--white);
+  position:sticky;
+  top:128px;
+  height:calc(100vh - 128px);
+  overflow-y:auto;
+}
+.lead-header{
+  display:none;
+  padding:14px 18px;
+  background:var(--charcoal);
+  color:var(--white);
+  align-items:center;justify-content:space-between;
+  font-family:var(--font-head);font-weight:600;font-size:0.85rem;
+  cursor:pointer;
+  user-select:none;
+}
+.lead-header .chev{transition:transform .2s ease;font-family:var(--font-num);}
+.lead-panel.open .lead-header .chev{transform:rotate(180deg);}
+.lead-content{padding:22px 24px 40px;}
+.lead-content h4{
+  font-family:var(--font-head);font-weight:800;font-size:0.95rem;margin:0 0 12px;
+  display:flex;align-items:center;gap:8px;
+}
+.lead-body{font-size:0.92rem;color:#2A2A2E;white-space:pre-wrap;}
+.lead-body table{white-space:normal;}
+.lead-image{
+  margin-top:16px;border:2px solid var(--charcoal);border-radius:6px;overflow:hidden;cursor:zoom-in;box-shadow:var(--shadow-charcoal-sm);
+}
+.lead-image img{display:block;width:100%;}
+
+.question-panel{padding:26px 28px 60px;}
+.q-meta-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.q-card{
+  background:var(--white);
+  border:2px solid var(--charcoal);
+  border-radius:6px;
+  box-shadow:var(--shadow-blue);
+  padding:24px;
+}
+.q-text{font-size:1.02rem;font-weight:700;margin:0 0 20px;line-height:1.8;}
+.choices{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+.choice{
+  display:flex;align-items:flex-start;gap:12px;
+  border:2px solid var(--border);
+  border-radius:6px;
+  padding:12px 14px;
+  transition:border-color .12s ease, box-shadow .12s ease, background .12s ease;
+  background:var(--white);
+}
+.choice:hover:not(.locked){border-color:var(--charcoal);box-shadow:2px 2px 0px var(--charcoal);cursor:pointer;}
+.choice.selected{border-color:var(--ader-blue);box-shadow:2px 2px 0px var(--ader-blue);background:#F2F3FF;}
+.choice.locked{cursor:default;}
+.choice.is-correct{border-color:var(--correct);background:#EAFBF2;box-shadow:2px 2px 0px var(--correct);}
+.choice.is-wrong{border-color:var(--incorrect);background:#FDEEEF;box-shadow:2px 2px 0px var(--incorrect);}
+.choice-mark{
+  flex:0 0 auto;width:22px;height:22px;border:2px solid var(--charcoal);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-num);font-weight:700;font-size:0.7rem;margin-top:2px;
+  background:var(--white);
+}
+.choice.multi .choice-mark{border-radius:4px;}
+.choice:not(.multi) .choice-mark{border-radius:50%;}
+.choice.selected .choice-mark{background:var(--ader-blue);color:var(--white);border-color:var(--ader-blue);}
+.choice.is-correct .choice-mark{background:var(--correct);border-color:var(--correct);color:var(--white);}
+.choice.is-wrong .choice-mark{background:var(--incorrect);border-color:var(--incorrect);color:var(--white);}
+.choice-text{font-size:0.92rem;padding-top:1px;}
+
+.q-actions{display:flex;justify-content:space-between;align-items:center;margin-top:22px;gap:10px;flex-wrap:wrap;}
+.q-actions-left{display:flex;gap:8px;}
+
+.result-banner{
+  margin-top:18px;padding:14px 16px;border-radius:6px;
+  font-family:var(--font-head);font-weight:800;font-size:0.95rem;
+  display:flex;align-items:center;gap:10px;
+  border:2px solid var(--charcoal);
+}
+.result-banner.ok{background:var(--correct);color:var(--white);border-color:var(--correct);}
+.result-banner.ng{background:var(--incorrect);color:var(--white);border-color:var(--incorrect);}
+
+.explanation{
+  margin-top:14px;background:var(--white);border:2px solid var(--border);border-left:5px solid var(--ader-blue);
+  border-radius:4px;padding:16px 18px;font-size:0.88rem;white-space:pre-wrap;color:#2A2A2E;
+}
+.explanation .exp-label{
+  font-family:var(--font-head);font-weight:800;font-size:0.72rem;letter-spacing:.06em;color:var(--ader-blue);
+  display:block;margin-bottom:8px;text-transform:uppercase;
+}
+
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:10px;flex-wrap:wrap;}
+.nav-row .center-info{font-family:var(--font-num);font-size:0.78rem;color:#7A7A85;}
+
+.empty-state{padding:60px 24px;text-align:center;color:#8A8A95;}
+.empty-state .big{font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--charcoal);margin-bottom:10px;}
+
+.loading-state{padding:80px 24px;text-align:center;color:#8A8A95;font-family:var(--font-num);}
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(18,18,18,.55);
+  display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;
+}
+.modal-overlay.hidden{display:none;}
+.modal-box{
+  background:var(--white);border:2px solid var(--charcoal);border-radius:8px;
+  box-shadow:var(--shadow-charcoal);
+  width:100%;max-width:640px;max-height:88vh;overflow-y:auto;padding:26px;position:relative;
+}
+.modal-box h3{font-family:var(--font-head);font-weight:800;margin:0 0 6px;font-size:1.1rem;}
+.modal-sub{font-size:0.8rem;color:#7A7A85;margin-bottom:16px;}
+.modal-box textarea{
+  width:100%;min-height:180px;border:2px solid var(--charcoal);border-radius:6px;
+  padding:12px;font-family:var(--font-num);font-size:0.8rem;resize:vertical;
+}
+.modal-actions{display:flex;justify-content:space-between;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.modal-feedback{margin-top:12px;font-size:0.82rem;padding:10px 12px;border-radius:6px;display:none;}
+.modal-feedback.show{display:block;}
+.modal-feedback.ok{background:#EAFBF2;color:var(--correct);border:1.5px solid var(--correct);}
+.modal-feedback.err{background:#FDEEEF;color:var(--incorrect);border:1.5px solid var(--incorrect);}
+.modal-close{position:absolute;top:14px;right:14px;}
+.modal-danger{border-top:1.5px dashed var(--border);margin-top:20px;padding-top:16px;}
+
+.image-modal .modal-box{max-width:90vw;padding:10px;background:transparent;border:none;box-shadow:none;}
+.image-modal img{width:100%;border-radius:6px;border:2px solid var(--white);}
+
+@media (max-width:900px){
+  .app-layout{display:block;}
+  .lead-panel{position:static;height:auto;border-right:none;border-bottom:3px solid var(--charcoal);}
+  .lead-header{display:flex;}
+  .lead-content{display:none;padding:16px 18px 26px;}
+  .lead-panel.open .lead-content{display:block;}
+  .topbar{padding:10px 14px;}
+  .question-panel{padding:18px 16px 50px;}
+  .stats-strip{gap:10px;}
+  .progress-track{width:90px;}
+}
+@media (max-width:480px){
+  .q-card{padding:16px;}
+  .logo-mark{font-size:1.05rem;}
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <header class="topbar">
+    <div class="topbar-row1">
+      <div class="logo">
+        <div>
+          <div class="logo-mark">KOKUSHI <span>DRILL</span></div>
+          <div class="logo-sub">Pharmacist National Exam / Practice Engine</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn" id="btnRandom">🔀 ランダム演習</button>
+        <button class="btn primary" id="btnOpenData">＋ データ追加登録</button>
+      </div>
+    </div>
+    <div class="topbar-row2">
+      <div class="filters">
+        <select class="select-pill" id="filterSubject"></select>
+        <select class="select-pill" id="filterType">
+          <option value="all">問題タイプ：すべて</option>
+          <option value="オリジナル">オリジナル</option>
+          <option value="類似">類似</option>
+        </select>
+        <select class="select-pill" id="filterMode">
+          <option value="all">モード：すべて</option>
+          <option value="wrong">未正解のみ</option>
+          <option value="bookmark">★ブックマークのみ</option>
+        </select>
+      </div>
+      <div class="stats-strip">
+        <div class="stats-item">
+          <span class="label">本日の解答数</span>
+          <span class="value" id="statToday">0</span>
+        </div>
+        <div class="stats-item">
+          <span class="label">本日の正解率</span>
+          <span class="value" id="statAccuracy">0%</span>
+        </div>
+        <div class="stats-item">
+          <span class="label">全体進捗</span>
+          <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <section class="lead-panel" id="leadPanel">
+      <div class="lead-header" id="leadHeader">
+        <span>▤ 症例・処方データを開く</span>
+        <span class="chev">▾</span>
+      </div>
+      <div class="lead-content" id="leadContent"></div>
+    </section>
+
+    <section class="question-panel" id="questionPanel">
+      <div class="loading-state">読み込み中…</div>
+    </section>
+  </main>
+</div>
+
+<!-- Data registration modal -->
+<div class="modal-overlay hidden" id="dataModal">
+  <div class="modal-box">
+    <button class="btn small ghost modal-close" id="btnCloseData">✕ 閉じる</button>
+    <h3>データ追加登録</h3>
+    <div class="modal-sub">ExcelやスプレッドシートからコピーしたTSV（タブ区切り）テキストをそのまま貼り付けてください。</div>
+    <textarea id="tsvInput" placeholder="[症例ID]&#9;[リード文]&#9;[問題文]&#9;[選択肢1]&#9;[選択肢2]&#9;[選択肢3]&#9;[選択肢4]&#9;[選択肢5]&#9;[正解番号]&#9;[科目]&#9;[タグ]&#9;[問題タイプ]&#9;[詳細解説]&#9;[画像URL]"></textarea>
+    <div class="modal-feedback" id="modalFeedback"></div>
+    <div class="modal-actions">
+      <button class="btn primary" id="btnParseTsv">登録する</button>
+      <button class="btn ghost" id="btnSampleTsv">サンプル書式を挿入</button>
+    </div>
+    <div class="modal-danger">
+      <div class="modal-sub" style="margin-bottom:10px;">登録済みの学習履歴・追加データをすべて消去します（元に戻せません）。</div>
+      <button class="btn small" id="btnResetAll" style="border-color:var(--incorrect);color:var(--incorrect);">⚠ 全データをリセット</button>
+    </div>
+  </div>
+</div>
+
+<!-- Image zoom modal -->
+<div class="modal-overlay hidden image-modal" id="imageModal">
+  <div class="modal-box">
+    <button class="btn small" id="btnCloseImage" style="position:absolute;top:-4px;right:-4px;">✕</button>
+    <img id="imageModalImg" src="" alt="拡大画像">
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   OFFICIAL SUBJECT DEFINITIONS (国家試験 正式9科目)
+   ============================================================ */
+const OFFICIAL_SUBJECTS = [
+  '物理',
+  '化学',
+  '生物',
+  '衛生',
+  '薬剤',
+  '薬理',
+  '病態・薬物治療',
+  '法規・制度・倫理',
+  '実務'
+];
+
+/* ============================================================
+   STORAGE KEYS (HYBRID STORAGE: window.storage / localStorage)
+   ============================================================ */
+const KEYS = {
+  userData:'kokushi_user_questions_v1',
+  progress:'kokushi_progress_v1',
+  bookmarks:'kokushi_bookmarks_v1',
+  log:'kokushi_log_v1'
+};
+
+/* In-memory mirrors of persisted data. Loaded once at startup,
+   updated synchronously in memory, and pushed to storage
+   in the background on every write. */
+let userQuestionsData = [];
+let progressData = {};
+let bookmarksData = {};
+let logData = [];
+
+async function storageGet(key, fallback){
+  try{
+    if(typeof window.storage !== 'undefined' && window.storage.get){
+      const result = await window.storage.get(key, false);
+      if(!result || typeof result.value === 'undefined') return fallback;
+      return JSON.parse(result.value);
+    }
+    const local = localStorage.getItem(key);
+    return local ? JSON.parse(local) : fallback;
+  }catch(e){
+    return fallback;
+  }
+}
+
+async function storageSet(key, value){
+  try{
+    if(typeof window.storage !== 'undefined' && window.storage.set){
+      await window.storage.set(key, JSON.stringify(value), false);
+    } else {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+  }catch(e){
+    console.error('storage set failed for', key, e);
+  }
+}
+
+async function storageDelete(key){
+  try{
+    if(typeof window.storage !== 'undefined' && window.storage.delete){
+      await window.storage.delete(key, false);
+    } else {
+      localStorage.removeItem(key);
+    }
+  }catch(e){
+    /* ignore - key may not exist */
+  }
+}
+
+function hashStr(s){
+  let h = 0;
+  for(let i=0;i<s.length;i++){
+    h = (h<<5) - h + s.charCodeAt(i);
+    h |= 0;
+  }
+  return 'H' + Math.abs(h).toString(36);
+}
+
+function escapeHtml(str){
+  return String(str||'')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+function todayStr(){
+  const d = new Date();
+  return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+}
+
+/* ============================================================
+   SAMPLE DATA (初期デモ問題)
+   ============================================================ */
+const SAMPLE_QUESTIONS = [
+  {
+    qid:'S-0001',
+    caseId:'',
+    leadText:'',
+    questionText:'弱酸性薬物のイオン形分率に関する記述のうち、正しいのはどれか。1つ選べ。',
+    choices:['pHがpKaより低いほどイオン形分率は増加する','pHがpKaと等しいとき、イオン形と分子形の存在比は1:1である','弱酸性薬物は酸性条件下でイオン形分率が増加する','pKaが小さいほど、同一pHでの分子形分率は高くなる','イオン形分率はHenderson-Hasselbalchの式では算出できない'],
+    correctRaw:'2',
+    correct:[2],
+    subject:'物理',
+    tag:'酸塩基平衡',
+    qType:'オリジナル',
+    explanation:'Henderson-Hasselbalchの式より、pH=pKaのとき log([A-]/[HA])=0 となるため、イオン形と分子形の存在比はちょうど1:1になる。',
+    imageUrl:''
+  },
+  {
+    qid:'S-0002',
+    caseId:'111-280',
+    leadText:'75歳男性。慢性心不全および心房細動の既往あり。ワルファリンカリウム錠1mg 3錠（分1 朝食後）を継続服用中。今回、下記の検査値を伴い、感冒様症状のため近医を受診し、抗菌薬が新たに処方された。<br><br><b>【検査値】</b><table><tr><th>項目</th><th>結果</th><th>基準値</th></tr><tr><td>PT-INR</td><td>2.1</td><td>0.9〜1.1</td></tr><tr><td>AST</td><td>28 IU/L</td><td>13〜33</td></tr><tr><td>ALT</td><td>24 IU/L</td><td>8〜42</td></tr><tr><td>eGFR</td><td>58 mL/min/1.73m²</td><td>&ge;60</td></tr></table>',
+    questionText:'今回新たに併用開始する薬剤として、ワルファリンの作用増強を特に注意すべきものはどれか。1つ選べ。',
+    choices:['アモキシシリン水和物','セファゾリンナトリウム','クラリスロマイシン','ホスホマイシンカルシウム','クロラムフェニコール（外用）'],
+    correctRaw:'3',
+    correct:[3],
+    subject:'実務',
+    tag:'相互作用;循環器',
+    qType:'オリジナル',
+    explanation:'クラリスロマイシンはCYP3A4阻害作用および腸内細菌叢変化によるビタミンK産生低下を介してワルファリンの抗凝固作用を増強させる。',
+    imageUrl:''
+  },
+  {
+    qid:'S-0003',
+    caseId:'111-280',
+    leadText:'75歳男性。慢性心不全および心房細動の既往あり。ワルファリンカリウム錠1mg 3錠（分1 朝食後）を継続服用中。今回、下記の検査値を伴い、感冒様症状のため近医を受診し、抗菌薬が新たに処方された。<br><br><b>【検査値】</b><table><tr><th>項目</th><th>結果</th><th>基準値</th></tr><tr><td>PT-INR</td><td>2.1</td><td>0.9〜1.1</td></tr><tr><td>AST</td><td>28 IU/L</td><td>13〜33</td></tr><tr><td>ALT</td><td>24 IU/L</td><td>8〜42</td></tr><tr><td>eGFR</td><td>58 mL/min/1.73m²</td><td>&ge;60</td></tr></table>',
+    questionText:'薬剤師として本症例の患者に確認・指導すべき内容として適切なのはどれか。2つ選べ。',
+    choices:['歯茎からの出血や皮下出血などの出血徴候の有無を確認する','納豆やクロレラ食品などビタミンK含有量の多い食品の摂取状況を確認する','抗菌薬服用中は自己判断でワルファリンを中止するよう説明する','抗菌薬服用終了後は速やかにビタミンK製剤を追加服用するよう説明する','次回受診時にPT-INRの再検査を提案する'],
+    correctRaw:'1,2',
+    correct:[1,2],
+    subject:'実務',
+    tag:'服薬指導;抗凝固薬',
+    qType:'オリジナル',
+    explanation:'ワルファリン服用患者では出血傾向のモニタリングと、ビタミンK含有食品の過剰摂取防止が重要である。',
+    imageUrl:''
+  }
+];
+
+/* ============================================================
+   ROBUST TSV PARSER (Excel / Full-width / Circled number support)
+   ============================================================ */
+function zenkakuToHankaku(str) {
+  return String(str || '').replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  }).replace(/　/g, ' ');
+}
+
+function parseCorrectAnswers(raw) {
+  if (!raw) return [];
+  let str = zenkakuToHankaku(raw);
+  const circledMap = {'①':'1','②':'2','③':'3','④':'4','⑤':'5','❶':'1','❷':'2','❸':'3','❹':'4','❺':'5'};
+  str = str.replace(/[①②③④⑤❶❷❸❹❺]/g, m => circledMap[m]);
+  str = str.replace(/[、・\s]/g, ',');
+  return str.split(',')
+    .map(s => s.trim())
+    .map(Number)
+    .filter(n => !isNaN(n) && n >= 1 && n <= 5);
+}
+
+function parseTSVRows(text) {
+  const rows = [];
+  let currentRow = [];
+  let inQuotes = false;
+  let token = '';
+
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    const next = text[i+1];
+
+    if (c === '"') {
+      if (inQuotes && next === '"') { token += '"'; i++; }
+      else { inQuotes = !inQuotes; }
+    } else if (c === '\t' && !inQuotes) {
+      currentRow.push(token);
+      token = '';
+    } else if ((c === '\r' || c === '\n') && !inQuotes) {
+      if (c === '\r' && next === '\n') { i++; }
+      currentRow.push(token);
+      token = '';
+      if (currentRow.some(cell => cell.trim().length > 0)) {
+        rows.push(currentRow);
+      }
+      currentRow = [];
+    } else {
+      token += c;
+    }
+  }
+  if (token.length > 0 || currentRow.length > 0) {
+    currentRow.push(token);
+    if (currentRow.some(cell => cell.trim().length > 0)) {
+      rows.push(currentRow);
+    }
+  }
+  return rows;
+}
+
+function normalizeRow(cols) {
+  const cleaned = cols.map(c => (c || '').trim());
+  if (cleaned.length < 8) return null;
+
+  // Header line detection
+  if (cleaned[0].includes('症例') || cleaned[1].includes('リード') || cleaned[2].includes('問題文') || cleaned[8].includes('正解')) {
+    return null;
+  }
+
+  let caseId = '', leadText = '', questionText = '', choices = [], correctRaw = '', subject = '未分類', tag = '', qType = '', explanation = '', imageUrl = '';
+
+  if (cleaned.length >= 14) {
+    caseId = cleaned[0];
+    leadText = cleaned[1];
+    questionText = cleaned[2];
+    choices = [cleaned[3], cleaned[4], cleaned[5], cleaned[6], cleaned[7]];
+    correctRaw = cleaned[8];
+    subject = cleaned[9];
+    tag = cleaned[10];
+    qType = cleaned[11];
+    explanation = cleaned[12];
+    imageUrl = cleaned[13];
+  } else if (cleaned.length === 13) {
+    leadText = cleaned[0]; questionText = cleaned[1];
+    choices = [cleaned[2], cleaned[3], cleaned[4], cleaned[5], cleaned[6]];
+    correctRaw = cleaned[7]; subject = cleaned[8]; tag = cleaned[9]; qType = cleaned[10]; explanation = cleaned[11]; imageUrl = cleaned[12];
+  } else if (cleaned.length === 12) {
+    leadText = cleaned[0]; questionText = cleaned[1];
+    choices = [cleaned[2], cleaned[3], cleaned[4], cleaned[5], cleaned[6]];
+    correctRaw = cleaned[7]; subject = cleaned[8]; tag = cleaned[9]; qType = cleaned[10]; explanation = cleaned[11];
+  } else {
+    const p = cleaned.slice();
+    while (p.length < 14) p.push('');
+    caseId = p[0]; leadText = p[1]; questionText = p[2];
+    choices = [p[3], p[4], p[5], p[6], p[7]];
+    correctRaw = p[8]; subject = p[9]; tag = p[10]; qType = p[11]; explanation = p[12]; imageUrl = p[13];
+  }
+
+  if (!questionText) return null;
+
+  const correct = parseCorrectAnswers(correctRaw);
+  if (correct.length === 0) return null;
+
+  if (!subject) subject = '未分類';
+
+  return {
+    caseId, leadText, questionText, choices, correctRaw, correct, subject, tag, qType, explanation, imageUrl
+  };
+}
+
+function parseTSVText(text) {
+  const rows = parseTSVRows(text);
+  const added = [];
+  let errors = 0;
+
+  rows.forEach(cols => {
+    const f = normalizeRow(cols);
+    if (!f) { errors++; return; }
+    f.qid = hashStr((f.caseId || '') + '|' + f.questionText + '|' + (f.leadText || '').slice(0, 80));
+    added.push(f);
+  });
+
+  return { added, errors, total: rows.length };
+}
+
+/* ============================================================
+   STATE MANAGEMENT
+   ============================================================ */
+let allQuestions = [];
+let filteredList = [];
+let currentIndex = 0;
+let selected = new Set();
+let answered = false;
+let lastCorrect = false;
+
+function combineData() {
+  allQuestions = SAMPLE_QUESTIONS.concat(userQuestionsData);
+}
+
+async function mergeUserQuestions(newOnes) {
+  const map = {};
+  userQuestionsData.forEach(q => { map[q.qid] = q; });
+  newOnes.forEach(q => { map[q.qid] = q; });
+  userQuestionsData = Object.values(map);
+  combineData();
+  await storageSet(KEYS.userData, userQuestionsData);
+}
+
+/* ============================================================
+   FILTERS (Fixed 9 Official Subjects + Dynamic fallback)
+   ============================================================ */
+function refreshSubjectOptions() {
+  const sel = document.getElementById('filterSubject');
+  const current = sel.value || 'all';
+
+  const presentSubjects = new Set(allQuestions.map(q => q.subject || '未分類'));
+  const extraSubjects = Array.from(presentSubjects).filter(s => !OFFICIAL_SUBJECTS.includes(s) && s !== '未分類');
+
+  let html = '<option value="all">科目：すべて (全9科目)</option>';
+
+  OFFICIAL_SUBJECTS.forEach(sub => {
+    const count = allQuestions.filter(q => q.subject === sub).length;
+    html += `<option value="${escapeHtml(sub)}">${escapeHtml(sub)} (${count})</option>`;
+  });
+
+  if (extraSubjects.length > 0) {
+    html += '<optgroup label="その他">';
+    extraSubjects.forEach(sub => {
+      const count = allQuestions.filter(q => q.subject === sub).length;
+      html += `<option value="${escapeHtml(sub)}">${escapeHtml(sub)} (${count})</option>`;
+    });
+    html += '</optgroup>';
+  }
+
+  if (presentSubjects.has('未分類')) {
+    const count = allQuestions.filter(q => (q.subject || '未分類') === '未分類').length;
+    html += `<option value="未分類">未分類 (${count})</option>`;
+  }
+
+  sel.innerHTML = html;
+  sel.value = current;
+  if (!sel.value) sel.value = 'all';
+}
+
+function applyFilters(preserveOrder) {
+  const subject = document.getElementById('filterSubject').value;
+  const qtype = document.getElementById('filterType').value;
+  const mode = document.getElementById('filterMode').value;
+
+  filteredList = allQuestions.filter(q => {
+    if (subject !== 'all' && (q.subject || '未分類') !== subject) return false;
+    if (qtype !== 'all' && q.qType !== qtype) return false;
+    if (mode === 'wrong') {
+      const p = progressData[q.qid];
+      if (p && p.correct) return false;
+    }
+    if (mode === 'bookmark') {
+      if (!bookmarksData[q.qid]) return false;
+    }
+    return true;
+  });
+
+  if (!preserveOrder) {
+    currentIndex = 0;
+  } else if (currentIndex >= filteredList.length) {
+    currentIndex = Math.max(0, filteredList.length - 1);
+  }
+  answered = false;
+  selected = new Set();
+}
+
+function shuffleFilteredList() {
+  for (let i = filteredList.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [filteredList[i], filteredList[j]] = [filteredList[j], filteredList[i]];
+  }
+  currentIndex = 0;
+  answered = false;
+  selected = new Set();
+}
+
+/* ============================================================
+   PROGRESS & STATS
+   ============================================================ */
+async function recordAnswer(qid, isCorrect) {
+  const prev = progressData[qid] || { attempts: 0, correct: false };
+  progressData[qid] = {
+    attempts: prev.attempts + 1,
+    correct: prev.correct || isCorrect,
+    lastAt: Date.now()
+  };
+
+  logData.push({ qid, correct: isCorrect, day: todayStr(), ts: Date.now() });
+
+  await Promise.all([
+    storageSet(KEYS.progress, progressData),
+    storageSet(KEYS.log, logData)
+  ]);
+}
+
+function renderStats() {
+  const today = todayStr();
+  const todayLogs = logData.filter(l => l.day === today);
+  const todayCount = todayLogs.length;
+  const todayCorrect = todayLogs.filter(l => l.correct).length;
+  const accuracy = todayCount > 0 ? Math.round((todayCorrect / todayCount) * 100) : 0;
+
+  document.getElementById('statToday').textContent = todayCount + '問';
+  document.getElementById('statAccuracy').textContent = accuracy + '%';
+
+  const totalQ = allQuestions.length;
+  const doneQ = allQuestions.filter(q => progressData[q.qid] && progressData[q.qid].correct).length;
+  const pct = totalQ > 0 ? Math.round((doneQ / totalQ) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+/* ============================================================
+   RENDER: LEAD PANEL
+   ============================================================ */
+function renderLeadPanel() {
+  const content = document.getElementById('leadContent');
+  const q = filteredList[currentIndex];
+  if (!q) { content.innerHTML = ''; return; }
+
+  let html = '';
+  if (q.caseId) {
+    html += `<span class="serial-badge blue">[ CASE-ID #${escapeHtml(q.caseId)} ]</span><br><br>`;
+  }
+  if (q.leadText && q.leadText.trim()) {
+    html += `<h4>▤ 症例・処方データ</h4><div class="lead-body">${q.leadText}</div>`;
+  } else {
+    html += `<h4>▤ 症例・処方データ</h4><div class="lead-body" style="color:#B0B0B8;">この設問にはリード文（症例情報）がありません。</div>`;
+  }
+  if (q.imageUrl && q.imageUrl.trim()) {
+    html += `<div class="lead-image" id="leadImageTrigger"><img src="${escapeHtml(q.imageUrl)}" alt="症例画像" loading="lazy"></div>`;
+  }
+  content.innerHTML = html;
+
+  const trigger = document.getElementById('leadImageTrigger');
+  if (trigger) {
+    trigger.addEventListener('click', () => {
+      document.getElementById('imageModalImg').src = q.imageUrl;
+      document.getElementById('imageModal').classList.remove('hidden');
+    });
+  }
+}
+
+/* ============================================================
+   RENDER: QUESTION PANEL
+   ============================================================ */
+function currentQuestion() { return filteredList[currentIndex]; }
+
+function caseInfo(q) {
+  if (!q.caseId) return null;
+  const siblings = filteredList.filter(x => x.caseId === q.caseId);
+  if (siblings.length <= 1) return null;
+  const pos = siblings.indexOf(q) + 1;
+  return { pos, total: siblings.length };
+}
+
+function renderQuestionPanel() {
+  const panel = document.getElementById('questionPanel');
+  const q = currentQuestion();
+
+  if (!q) {
+    panel.innerHTML = `
+      <div class="empty-state">
+        <div class="big">該当する問題がありません</div>
+        <div>上のフィルター条件を変更するか、「データ追加登録」から問題を追加してください。</div>
+      </div>`;
+    return;
+  }
+
+  const isBookmarked = !!bookmarksData[q.qid];
+  const cInfo = caseInfo(q);
+  const isMulti = q.correct.length > 1;
+
+  let metaHtml = `<span class="serial-badge outline">${escapeHtml(q.subject || '未分類')}</span>`;
+  if (q.qType) metaHtml += ` <span class="serial-badge outline">${escapeHtml(q.qType)}</span>`;
+  if (cInfo) metaHtml += ` <span class="serial-badge">症例内 ${cInfo.pos}/${cInfo.total}問目</span>`;
+  metaHtml += ` <span class="serial-badge blue">${isMulti ? '複数選択（' + q.correct.length + 'つ選べ）' : '単一選択（1つ選べ）'}</span>`;
+
+  let choicesHtml = '';
+  q.choices.forEach((text, idx) => {
+    if (!text || !text.trim()) return;
+    const num = idx + 1;
+    const isSel = selected.has(num);
+    let cls = 'choice' + (isMulti ? ' multi' : '');
+    if (answered) {
+      cls += ' locked';
+      const isAnsCorrect = q.correct.includes(num);
+      if (isAnsCorrect) cls += ' is-correct';
+      else if (isSel && !isAnsCorrect) cls += ' is-wrong';
+    } else if (isSel) {
+      cls += ' selected';
+    }
+    const markSymbol = answered
+      ? (q.correct.includes(num) ? '✓' : (isSel ? '✕' : num))
+      : (isSel ? '✓' : num);
+    choicesHtml += `
+      <li class="${cls}" data-num="${num}">
+        <span class="choice-mark">${markSymbol}</span>
+        <span class="choice-text">${escapeHtml(text)}</span>
+      </li>`;
+  });
+
+  let resultHtml = '';
+  let explanationHtml = '';
+  if (answered) {
+    resultHtml = `<div class="result-banner ${lastCorrect ? 'ok' : 'ng'}">${lastCorrect ? '◎ 正解です' : '✕ 不正解です'}</div>`;
+    if (q.explanation && q.explanation.trim()) {
+      explanationHtml = `<div class="explanation"><span class="exp-label">詳細解説</span>${escapeHtml(q.explanation)}</div>`;
+    }
+  }
+
+  panel.innerHTML = `
+    <div class="q-meta-row">${metaHtml}</div>
+    <div class="q-card">
+      <p class="q-text">${escapeHtml(q.questionText)}</p>
+      <ul class="choices" id="choicesList">${choicesHtml}</ul>
+      <div class="q-actions">
+        <div class="q-actions-left">
+          <button class="btn small" id="btnBookmark">${isBookmarked ? '★ 登録済み' : '☆ ブックマーク'}</button>
+        </div>
+        <div>
+          ${answered
+            ? `<button class="btn primary" id="btnNext">次の問題へ →</button>`
+            : `<button class="btn primary" id="btnSubmit" ${selected.size === 0 ? 'disabled' : ''}>解答する</button>`
+          }
+        </div>
+      </div>
+      ${resultHtml}
+      ${explanationHtml}
+    </div>
+    <div class="nav-row">
+      <button class="btn ghost small" id="btnPrev" ${currentIndex <= 0 ? 'disabled' : ''}>← 前の問題</button>
+      <span class="center-info">${currentIndex + 1} / ${filteredList.length} 問</span>
+      <button class="btn ghost small" id="btnNextNav" ${currentIndex >= filteredList.length - 1 ? 'disabled' : ''}>次の問題 →</button>
+    </div>
+  `;
+
+  bindQuestionEvents(q, isMulti);
+}
+
+function bindQuestionEvents(q, isMulti) {
+  const list = document.getElementById('choicesList');
+  if (list) {
+    list.querySelectorAll('.choice').forEach(el => {
+      el.addEventListener('click', () => {
+        if (answered) return;
+        const num = parseInt(el.getAttribute('data-num'), 10);
+        if (isMulti) {
+          if (selected.has(num)) selected.delete(num); else selected.add(num);
+        } else {
+          selected = new Set([num]);
+        }
+        renderQuestionPanel();
+      });
+    });
+  }
+
+  const btnSubmit = document.getElementById('btnSubmit');
+  if (btnSubmit) {
+    btnSubmit.addEventListener('click', async () => {
+      if (selected.size === 0) return;
+      const chosen = Array.from(selected).sort((a, b) => a - b);
+      const correct = q.correct.slice().sort((a, b) => a - b);
+      lastCorrect = JSON.stringify(chosen) === JSON.stringify(correct);
+      answered = true;
+      renderQuestionPanel();
+      renderStats();
+      await recordAnswer(q.qid, lastCorrect);
+      renderStats();
+    });
+  }
+
+  const btnNext = document.getElementById('btnNext');
+  if (btnNext) btnNext.addEventListener('click', goNext);
+
+  const btnPrev = document.getElementById('btnPrev');
+  if (btnPrev) btnPrev.addEventListener('click', goPrev);
+
+  const btnNextNav = document.getElementById('btnNextNav');
+  if (btnNextNav) btnNextNav.addEventListener('click', goNext);
+
+  const btnBookmark = document.getElementById('btnBookmark');
+  if (btnBookmark) {
+    btnBookmark.addEventListener('click', async () => {
+      if (bookmarksData[q.qid]) delete bookmarksData[q.qid];
+      else bookmarksData[q.qid] = true;
+      renderQuestionPanel();
+      await storageSet(KEYS.bookmarks, bookmarksData);
+      if (document.getElementById('filterMode').value === 'bookmark') {
+        applyFilters(true);
+        renderAll();
+      }
+    });
+  }
+}
+
+function goNext() {
+  if (currentIndex < filteredList.length - 1) {
+    currentIndex++;
+    answered = false;
+    selected = new Set();
+    renderAll();
+  }
+}
+function goPrev() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    answered = false;
+    selected = new Set();
+    renderAll();
+  }
+}
+
+function renderAll() {
+  renderLeadPanel();
+  renderQuestionPanel();
+  renderStats();
+}
+
+/* ============================================================
+   MODAL & TSV PARSE HANDLERS
+   ============================================================ */
+const SAMPLE_TSV = "111-999\t75歳男性。慢性心不全の既往あり。\tこの問題の適切な選択肢を選べ。1つ選べ。\t選択肢1\t選択肢2\t選択肢3\t選択肢4\t選択肢5\t2\t薬理\tサンプルタグ\tオリジナル\tここに詳細解説を入力します。\t";
+
+function openDataModal() {
+  document.getElementById('dataModal').classList.remove('hidden');
+  document.getElementById('modalFeedback').classList.remove('show', 'ok', 'err');
+}
+function closeDataModal() {
+  document.getElementById('dataModal').classList.add('hidden');
+}
+
+async function handleParseTsv() {
+  const text = document.getElementById('tsvInput').value;
+  const fb = document.getElementById('modalFeedback');
+  if (!text || !text.trim()) {
+    fb.textContent = '貼り付けるTSVデータがありません。';
+    fb.className = 'modal-feedback show err';
+    return;
+  }
+
+  const { added, errors, total } = parseTSVText(text);
+  if (added.length === 0) {
+    fb.textContent = `登録できる行が見つかりませんでした（読み込み行数: ${total} / 解析不可: ${errors}）。正解番号（列9）が入力されているかご確認ください。`;
+    fb.className = 'modal-feedback show err';
+    return;
+  }
+
+  fb.textContent = '登録中…';
+  fb.className = 'modal-feedback show ok';
+
+  await mergeUserQuestions(added);
+  refreshSubjectOptions();
+  applyFilters(false);
+  renderAll();
+
+  fb.textContent = `${added.length} 件の問題を追加登録しました！（全 ${total} 行中）`;
+  fb.className = 'modal-feedback show ok';
+  document.getElementById('tsvInput').value = '';
+}
+
+async function handleResetAll() {
+  if (!confirm('登録済みの追加データ・学習履歴・ブックマークをすべて削除します。よろしいですか？')) return;
+
+  userQuestionsData = [];
+  progressData = {};
+  bookmarksData = {};
+  logData = [];
+
+  await Promise.all([
+    storageDelete(KEYS.userData),
+    storageDelete(KEYS.progress),
+    storageDelete(KEYS.bookmarks),
+    storageDelete(KEYS.log)
+  ]);
+
+  combineData();
+  refreshSubjectOptions();
+  applyFilters(false);
+  renderAll();
+  const fb = document.getElementById('modalFeedback');
+  fb.textContent = 'すべてのデータをリセットしました。';
+  fb.className = 'modal-feedback show ok';
+}
+
+/* ============================================================
+   INIT & EVENT BINDINGS
+   ============================================================ */
+async function init() {
+  const [userData, progress, bookmarks, log] = await Promise.all([
+    storageGet(KEYS.userData, []),
+    storageGet(KEYS.progress, {}),
+    storageGet(KEYS.bookmarks, {}),
+    storageGet(KEYS.log, [])
+  ]);
+  userQuestionsData = userData;
+  progressData = progress;
+  bookmarksData = bookmarks;
+  logData = log;
+
+  combineData();
+  refreshSubjectOptions();
+  applyFilters(false);
+  renderAll();
+
+  document.getElementById('leadHeader').addEventListener('click', () => {
+    document.getElementById('leadPanel').classList.toggle('open');
+  });
+
+  document.getElementById('filterSubject').addEventListener('change', () => { applyFilters(false); renderAll(); });
+  document.getElementById('filterType').addEventListener('change', () => { applyFilters(false); renderAll(); });
+  document.getElementById('filterMode').addEventListener('change', () => { applyFilters(false); renderAll(); });
+
+  document.getElementById('btnRandom').addEventListener('click', () => {
+    shuffleFilteredList();
+    renderAll();
+  });
+
+  document.getElementById('btnOpenData').addEventListener('click', openDataModal);
+  document.getElementById('btnCloseData').addEventListener('click', closeDataModal);
+  document.getElementById('btnParseTsv').addEventListener('click', handleParseTsv);
+  document.getElementById('btnSampleTsv').addEventListener('click', () => {
+    document.getElementById('tsvInput').value = SAMPLE_TSV;
+  });
+  document.getElementById('btnResetAll').addEventListener('click', handleResetAll);
+  document.getElementById('dataModal').addEventListener('click', (e) => {
+    if (e.target.id === 'dataModal') closeDataModal();
+  });
+
+  document.getElementById('btnCloseImage').addEventListener('click', () => {
+    document.getElementById('imageModal').classList.add('hidden');
+  });
+  document.getElementById('imageModal').addEventListener('click', (e) => {
+    if (e.target.id === 'imageModal') document.getElementById('imageModal').classList.add('hidden');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('dataModal').classList.contains('hidden')) return;
+    if (e.key === 'ArrowRight') goNext();
+    if (e.key === 'ArrowLeft') goPrev();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+</body>
+</html>
